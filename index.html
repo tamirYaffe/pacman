@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Arya in a maze</title>
+    <!-- link tags tell the browser to use our own custom CSS. -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+</head>
+<body style="background-color: aliceblue">
+<div id="aboutModal" class="modal" >
+    <!-- Modal content -->
+    <div class="modal-content" style="width: 50%">
+        <div class="container-fluid mx-auto p-0" style="text-align: center">
+            <div class="row">
+                <div class="col-sm-12">
+                    <span class="close">&times;</span>
+                    <h1>About</h1>
+                    <p>Magishim: Tamir Yaffe, Yishaia Zabary | 305795239, 307963538 <br> we used the jquery V3.3.1 plugin, and the jquery.validate V1.19.0.
+                        <br>we used bootstrap4 as our main design tool. <br>for fonts we used Google Fonts API<br>the bonus features we added are:
+                        <br>1.extraLife coin which add 1 extra life. <br>2.bonusClock coin which add 20 seconds to the game.  <br>3.sounds to death and eating special coins.  </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="container-fluid p-o" style="margin-top:0; padding: 0">
+    <div class="row" style="float:top; background-color: cornflowerblue">
+        <div class="col-sm-12">
+            <div id="header">
+                <table style="width: 100%">
+                    <tr>
+                        <td style="width: 30%">
+                            <img src="images/pacman_logo.png" alt="" style="float: left; width: 25px; ">
+                        </td>
+                        <td style="width: 20%">
+                            <h4 style="font-family: 'Indie Flower', cursive; margin-top: 5px">Arya in a maze</h4>
+                        </td>
+                        <td style="width: 20%">
+                            <small>Yishaia Zabary 307963538</small>
+                            <small>Tamir Yaffe 305795239</small>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="background-color: aqua">
+        <div class="col-sm-12" style="font-family: 'Indie Flower', cursive;padding: 0">
+            <div id="menuDiv" >
+                <button style="float:left; background-color: aqua; border-width: 4px;border: dashed yellow; margin-left:1vw" onclick="SwipeDivs('settings_div')" class="btn btn-nav"> Settings</button>
+                <button style="float:left; background-color: aqua; border-width: 4px;border: dashed green;" onclick="SwipeDivs('welcome_div')" class="btn btn-nav"> Welcome</button>
+                <button style="float:left; background-color: aqua; border-width: 4px;border: dashed red;" onclick="SwipeDivs('register_div')" class="btn btn-nav"> Register</button>
+                <button style="float:left; background-color: aqua; border-width: 4px;border: dashed magenta;" onclick="SwipeDivs('login_div')" class="btn btn-nav" id="loginButton"> Login</button>
+                <button style="float:left; background-color: aqua; border-width: 4px;border: dashed white;" onclick="ModalShow(this)" class="btn btn-nav" id="aboutBtn">About</button>
+                <button style="float:left; background-color: aqua; border-width: 4px;border: dashed black;" onclick="SwipeDivs('game_div')" class="btn btn-nav"> Start Game!</button>
+                <h3 style="font-size:15px; color: darkmagenta; font-weight: 600">Hello </h3><h3 id="userFirstLastName" style="font-size:13px; font-weight: 600 ">User</h3>
+            </div>
+        </div>
+    </div>
+    <div class="row bkg-animated" style="margin: 0">
+        <div class="col-sm-12">
+            <div class="contentDiv" id="welcome_div">
+                <div class="container-fluid mx-auto p-0">
+                    <div class="row">
+                        <div class="col-sm-12" style="">
+                            <img src="images/pacman_logo.png" alt="" style="margin-top:5vw; width: 300px; height: 300px; align-items: center;">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4"></div>
+                        <div class="col-sm-4" style="font-family: 'Indie Flower', cursive;">
+                            <h1 style="color: whitesmoke">Welcome!</h1>
+                            <button class="btn btn-primary" onclick="SwipeDivs('login_div')">Login</button>
+                            <button class="btn btn-dark" onclick="SwipeDivs('register_div')">Register</button>
+                        </div>
+                        <div class="col-sm-4">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contentDiv" id="login_div" style="display: none;">
+                <div class="container-fluid mx-auto p-0">
+                    <div class="row">
+                        <div class="col-sm-4"></div>
+                        <div class="col-sm-4">
+                            <form action="javascript: LoginFormSubmit()" id="loginForm" autocomplete="on">
+                                <div class="form-group">
+                                    <label for="usernameInputField" style="color:whitesmoke;">Username</label>
+                                    <input type="text" class="form-control" id="usernameInputField" placeholder="Enter username" autocomplete="on">
+                                </div>
+                                <div class="form-group" style="">
+                                    <label for="userPasswordInputField" style="color:whitesmoke;">Password</label>
+                                    <input type="password" class="form-control" id="userPasswordInputField" placeholder="Password" autocomplete="on">
+                                </div>
+                                <button type="submit" class="btn btn-info" >Submit</button>
+                            </form>
+                        </div>
+                        <div class="col-sm-4"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="contentDiv" id="register_div" style="display: none;">
+                <div class="container-fluid mx-auto p-0">
+                    <div class="row">
+                        <div class="col-sm-4"></div>
+                        <div class="col-sm-4">
+                            <form action="javascript: RegisterFormSubmit()" id="registerForm">
+                                <div class="form-group">
+                                    <label for="usernameInputField" style="color:white">Username</label>
+                                    <input type="text" class="form-control" id="registerUsernameInputField" name="registerUsernameInputField" placeholder="Enter username" autocomplete="on">
+                                </div>
+                                <div class="form-group" style="">
+                                    <label for="userPasswordInputField" style="color:white">Password</label>
+                                    <input type="password" class="form-control" id="registerUserPasswordInputField" name="registerUserPasswordInputField" placeholder="Password" autocomplete="on">
+                                </div>
+                                <div class="form-group" style="">
+                                    <label for="userPasswordInputField" style="color:white">First name</label>
+                                    <input type="text" class="form-control" id="registerUserFNInputField" name="registerUserFNInputField" placeholder="First name">
+                                </div>
+                                <div class="form-group" style="">
+                                    <label for="userPasswordInputField" style="color:white">Last name</label>
+                                    <input type="text" class="form-control" id="registerUserLNInputField" name="registerUserLNInputField" placeholder="Last name">
+                                </div>
+                                <div class="form-group" style="">
+                                    <label for="userPasswordInputField" style="color:white">Email</label>
+                                    <input type="email" class="form-control" id="registerUserEmailInputField" name="registerUserEmailInputField" placeholder="Email">
+                                </div>
+                                <div class="form-group" style="">
+                                    <label for="userPasswordInputField" style="color:white">Date of birth</label>
+                                    <input type="date" class="form-control" id="registerUserDBirthInputField" name="registerUserDBirthInputField">
+                                </div>
+                                <button type="submit" class="btn btn-primary" >Submit</button>
+                            </form>
+                        </div>
+                        <div class="col-sm-4"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="contentDiv" id="settings_div" style="display: none">
+                <div class="container-fluid mx-auto p-0" style="text-align: left">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <form action="javascript: settingsFormSubmit()" id="SettingsForm">
+                                <h2 style="color: whitesmoke;">Controls:</h2>
+                                <label for="upInput" style="color: whitesmoke">UP</label>
+                                <input type="text" placeholder="non tab key" id="upInput" tabindex="0">
+                                <label for="rightInput" style="color: whitesmoke">RIGHT</label>
+                                <input type="text" placeholder="non tab key" id="rightInput" tabindex="0">
+                                <label for="downInput" style="color: whitesmoke">DOWN</label>
+                                <input type="text" placeholder="non tab key" id="downInput" tabindex="0">
+                                <label for="leftInput" style="color: whitesmoke">LEFT</label>
+                                <input type="text" placeholder="non tab key" id="leftInput" tabindex="0">
+                                <br>
+                                <br>
+                                <h2 style="color: whitesmoke;">Awards Settings</h2>
+                                <h6 style="color: whitesmoke;">Number of balls to collect</h6><input type="number" id="ballsNumber" placeholder="50-90"><br>
+                                <h4 style="color: whitesmoke;">Balls ranks configuration</h4>
+                                <h6 style="color: whitesmoke;">LVL1</h6>
+                                <label style="color: whitesmoke;" for="ball1Color">Ball Color:</label>
+                                <input type="text" id="ball1Color" placeholder="red/green/yellow/magenta/white"><br>
+                                <h6 style="color: whitesmoke;">LVL2</h6>
+                                <label style="color: whitesmoke;" for="ball2Color">Ball Color:</label>
+                                <input type="text" id="ball2Color"><br>
+                                <h6 style="color: whitesmoke;">LVL3</h6>
+                                <label style="color: whitesmoke;" for="ball3Color">Ball Color:</label>
+                                <input type="text" id="ball3Color"><br>
+                                <br>
+                                <br>
+                                <h2 style="color: whitesmoke;">Other Settings</h2>
+                                <label style="color: whitesmoke;" for="gameLength">Game Length</label>
+                                <input type="number" id="gameLength" placeholder="minimum is 60">
+                                <label style="color: whitesmoke;" for="gameLength">Monsters Number</label>
+                                <input type="number" id="monstersNumbers" placeholder="1-3">
+                                <button type="submit" class="btn btn-info" >Submit</button>
+                            </form>
+                            <button onclick="PopulateRandomSettings()">RANDOM</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contentDiv" id="game_div" style="display: none">
+                <div class="container-fluid p-0">
+                    <div class="row">
+                        <div class="col-sm-12" style="margin:0; padding:0;">
+                            <table style="margin-left: 35%;border: floralwhite 1px solid">
+                                <tr>
+                                    <td style="border: floralwhite 1px solid">
+                                        <h4 style="color: whitesmoke; font-family: 'Orbitron', sans-serif;">SCORE:</h4>
+                                        <h6 style="color: red; font-family: 'Orbitron', sans-serif;" id="scoreTag">00000</h6>
+                                    </td>
+                                    <td style="border: floralwhite 1px solid;">
+                                        <h4 style="color: whitesmoke; font-family: 'Orbitron', sans-serif;">TIME LEFT:</h4>
+                                        <h6 style="color: red; font-family: 'Orbitron', sans-serif;" id="timerTag">00000</h6>
+                                    </td>
+                                    <td style="border: floralwhite 1px solid">
+                                        <h4 style="color: whitesmoke; font-family: 'Orbitron', sans-serif;">LIVES:</h4>
+                                        <h6 style="color: red; font-family: 'Orbitron', sans-serif;" id="livesCntTag">3</h6>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row" style="margin:0; padding: 0;">
+                        <div class="col-sm-12">
+                            <div class="game_div" id="board_div" >
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top:7vw;">
+        <div class="col-sm-4">
+            <small>this website uses bootstrap, javascript, jquery and jquery.validators libraries.<br><br></small>
+            <small>the name was chosen in honor of Arya Stark, better watch GOT S8E3</small>
+        </div>
+        <div class="col-sm-4">
+            <small>CONTACT US<br></small>
+            <small>Tamir : tamiry@post.bgu.ac.il<br></small>
+            <small>Yishaia : yishaiaz@post.bgu.ac.il</small>
+        </div>
+        <div class="col-sm-4">
+            <small>this game was inspired by the movie PIXELS </small>
+            <a href="https://www.youtube.com/watch?v=kiL6pLaFucs">Meet Pacman</a>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript" src="logic.js"></script>
+<script type="text/javascript" src="main_logic.js"></script>
+</body>
+</html>

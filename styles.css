@@ -1,0 +1,181 @@
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+.bkg-animated {
+    background: gray url(images/dragons_fight.png) repeat 0 0;
+    width: 100%;
+    /*margin: 0;*/
+    text-align: center;
+    min-height: 600px;
+    /*padding-top: 120px;*/
+    box-sizing: border-box;
+    -webkit-animation: slide 20s linear infinite;
+}
+
+@-webkit-keyframes slide {
+    from { background-position: 0 0; }
+    to { background-position: -400px 0; }
+}
+.error {
+    font-family: 'PT Sans', sans-serif;
+    color: rgb(202, 224, 243);
+    background-color: rgb(202, 79, 49);
+}
+
+
+/*-----------------------------------------------------------*/
+/* We want the page to be black and our game board centered. */
+/*-----------------------------------------------------------*/
+.game_div {
+    background-color: black;
+}
+
+.game_div > div {
+    margin: 120px auto;
+    margin-top: 50px;
+    text-align: center;
+}
+
+
+/*-----------------------------------------------------------*/
+/* Every game tile should be 50px by 50px and sitting next   */
+/* one another.                                              */
+/*-----------------------------------------------------------*/
+.tile {
+    /* Set the dimensions of each tile. */
+    width: 50px;
+    height: 50px;
+
+    /* Make them sit snugly together */
+    display: inline-block;
+    vertical-align: top;
+}
+
+
+/*-----------------------------------------------------------*/
+/* Pacman will encounter walls and coins.                    */
+/* Pacman can't move through walls, but can eat coins.       */
+/*-----------------------------------------------------------*/
+
+/* Walls are blue with an off-blue border. */
+/* Walls are blue with an off-blue border. */
+.wall {
+    background-color: blue;
+    border: 2px solid cornflowerblue;
+}
+
+/* Coins are made by rounding the corners and  */
+/* making them much smaller than 50px by 50px. */
+
+.smallCoin {
+    border-radius: 50%;
+    transform: scale(0.3);
+    text-align: center;
+    font-size: 30px;
+}
+
+.mediumCoin {
+    border-radius: 50%;
+    transform: scale(0.35);
+    text-align: center;
+    font-size: 30px;
+}
+
+.bigCoin {
+    border-radius: 50%;
+    transform: scale(0.4);
+    text-align: center;
+    font-size: 30px;
+}
+
+
+/*-----------------------------------------------------------*/
+/* We make pacman appear to face different directions by     */
+/* using different background images based on class name.    */
+/*-----------------------------------------------------------*/
+.bonuschaser {
+    background-image: url('images/blob-angel.gif');
+    background-size: contain;
+}
+
+.bonusItem{
+    background-image: url('images/clock.gif');
+    background-size: contain;
+}
+
+.extralife{
+    background-image: url('images/pacman_extraLife.gif');
+    background-size: contain;
+}
+
+.ghost {
+    background-image: url('images/ghost2.gif');
+    background-size: contain;
+}
+
+.pacman {
+    background-image: url('images/pacman.gif');
+    background-size: contain;
+
+}
+
+.left {
+    background-image: url('images/pacman-left.gif');
+    background-size: contain;
+}
+
+.up {
+    background-image: url('images/pacman-up.gif');
+    background-size: contain;
+}
+
+.down {
+    background-image: url('images/pacman-down.gif');
+    background-size: contain;
+}
+
+
+
+
+/*MODAL*/
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(26, 32, 20); /* Fallback color */
+    background-color: rgba(26,32,40,0.5); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    font-family: 'PT Sans', sans-serif;
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
